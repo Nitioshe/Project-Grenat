@@ -1,0 +1,10 @@
+class Monster:
+    def __init__(self, name, health, attack, exp_reward, drop):
+        self.name = name
+        self.health = health
+        self.attack = attack
+        self.exp_reward = exp_reward
+        self.drop = drop
+
+    def display_stats(self):
+        print(f"{self.name} - Health: {self.health}, Attack: {self.attack}")
