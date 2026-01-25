@@ -3,6 +3,7 @@ import time
 from core.loader import load_zone
 from classes.monster import Monster
 from combat.battle import battle
+from core.state import GameState
 
 def Forest(player, inventory):
     zone = load_zone("Zones/Forest.json")
@@ -16,9 +17,13 @@ def Forest(player, inventory):
     monster = random.choice(monsters)
     monster.display_stats()
 
-    result = battle(player, monster)
+    print("1. Explore\n2. Back to city")
 
-    if result:
-        print("You survived the forest.")
-    else:
-        print("Game Over.")
+    choice = input("> ")
+
+    if choice == "1":
+        return GameState.COMBAT
+    elif choice == "2":
+        return GameState.TOWN
+    
+    return GameState.FOREST

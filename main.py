@@ -6,6 +6,7 @@ from zones.tettno import Tettno_main
 from zones.forest import Forest
 from zones.bank import Bank
 from zones.guild import AdventurersGuild
+from core.game import game_loop
 
 def create_character():
     name = input("Name: ") or "Numa"
@@ -21,15 +22,7 @@ def main():
 
     player = create_character()
 
-    while True:
-        dest = Tettno_main(player, inventory)
-
-        if dest == "1":
-            Forest(player, inventory)
-        elif dest == "2":
-            Bank(player, inventory)
-        elif dest == "3":
-            AdventurersGuild(player, inventory)
+    game_loop(player)
 
 if __name__ == "__main__":
     main()

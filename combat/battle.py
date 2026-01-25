@@ -1,6 +1,7 @@
 import random
 import time
 from core.audio import jouer_bruit
+from core.state import GameState
 
 def battle(player, monster):
     poison = 1
