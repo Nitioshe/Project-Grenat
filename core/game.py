@@ -1,24 +1,26 @@
 from core.state import GameState
 from zones import Tettno_main, Forest, AdventurersGuild
-from combat import battle
-from classes import inventory
+from combat.battle import battle
+
 
 def game_loop(player):
     state = GameState.TOWN
     running = True
+    current_monster = None
 
     while running:
         if state == GameState.TOWN:
-            state = Tettno_main(player, inventory)
+            state = Tettno_main(player)
 
         elif state == GameState.FOREST:
-            state = Forest(player, inventory)
+            state, current_monster = Forest(player)
 
         elif state == GameState.COMBAT:
-            state = battle(player, inventory)
-        
+            state = battle(player, current_monster)
+            current_monster = None
+
         elif state == GameState.GUILD:
-            state = AdventurersGuild(player, inventory)
+            state = AdventurersGuild(player)
 
         elif state == GameState.EXIT:
             running = False

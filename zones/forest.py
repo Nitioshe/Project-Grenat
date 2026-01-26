@@ -5,7 +5,7 @@ from classes.monster import Monster
 from combat.battle import battle
 from core.state import GameState
 
-def Forest(player, inventory):
+def Forest(player):
     zone = load_zone("Zones/Forest.json")
     monsters_data = zone.get("monsters", [])
 
@@ -22,7 +22,7 @@ def Forest(player, inventory):
     choice = input("> ")
 
     if choice == "1":
-        return GameState.COMBAT
+        return GameState.COMBAT, monster
     elif choice == "2":
         return GameState.TOWN
     
