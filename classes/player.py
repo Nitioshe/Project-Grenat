@@ -6,6 +6,8 @@ from classes.inventory import Inventory
 from core.audio import jouer_bruit
 
 from skills.mage import Fireball
+from skills.rogue import Backstab
+from skills.samurai import Iaijutsu
 
 
 class Player:
@@ -29,6 +31,10 @@ class Player:
 
         if player_class == "Mage":
             self.skills.append(Fireball())
+        elif player_class == "Rogue":
+            self.skills.append(Backstab())
+        elif player_class == "Samurai":
+            self.skills.append(Iaijutsu())
 
         self.mana = self.maxmana = 20 if player_class == "Mage" else 0
         self.agility = self.maxagility = 2 if player_class == "Rogue" else 0
