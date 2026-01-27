@@ -30,7 +30,7 @@ def battle(player, monster):
         print(f"    {monster.name} HP: {monster.health}")
         print("╚----------------------╝")
 
-        print("1. Attack\n2. Skills\n 3. Inventory\n4. Flee")
+        print("1. Attack\n2. Skills\n3. Inventory\n4. Flee")
 
         choice = input("> ")
 

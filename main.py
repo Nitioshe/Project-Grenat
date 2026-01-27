@@ -33,7 +33,7 @@ def main():
 
     if choice == "load":
         player = load_game()
-        
+
         if player is None:
             print("No save found.")
             return
