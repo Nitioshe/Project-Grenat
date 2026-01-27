@@ -2,8 +2,12 @@
 Docstring for main module
 """
 from ui.intro import start_animation
+from ui.menu import main_menu
 from classes.player import Player
+from classes.inventory import Inventory
 from core.game import game_loop
+from core.save import load_game
+from core.save import save_game
 
 
 def create_character():
@@ -25,7 +29,17 @@ def main():
     """
     start_animation()
 
-    player = create_character()
+    choice = main_menu()
+
+    if choice == "load":
+        player = load_game()
+        
+        if player is None:
+            print("No save found.")
+            return
+    else:
+        inventory = Inventory()
+        player = create_character()
 
     game_loop(player)
 

@@ -20,14 +20,3 @@ class Inventory:
             print("Empty")
         for item, qty in self.items.items():
             print(f"- {item}: {qty}")
-
-    def save(self):
-        with open("Saves/Inventory.json", "w") as f:
-            json.dump(self.items, f)
-
-    def load(self):
-        try:
-            with open("Saves/Inventory.json", "r") as f:
-                self.items = json.load(f)
-        except FileNotFoundError:
-            self.items = {}
