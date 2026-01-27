@@ -30,7 +30,7 @@ def battle(player, monster):
         print(f"    {monster.name} HP: {monster.health}")
         print("╚----------------------╝")
 
-        print("1. Attack\n2. Inventory\n3. Flee")
+        print("1. Attack\n2. Skills\n 3. Inventory\n4. Flee")
 
         choice = input("> ")
 
@@ -48,10 +48,26 @@ def battle(player, monster):
                 print(f"{monster.name} suffers {poison_damage} poison damage")
 
         elif choice == "2":
+            for i, skill in enumerate(player.skills):
+                cd = f"(CD: {skill.current_cd})" if skill.current_cd > 0 else ""
+                print(f"{i+1}. {skill.name} {cd}")
+
+            s = int(input("> ")) - 1
+            skill = player.skills[s]
+
+            if skill.can_use(player):
+                skill.use(player, monster)
+            else:
+                print("Skill indisponible")
+            
+            for skill in player.skills:
+                skill.reduce_cooldown()
+        
+        elif choice == "3":
             player.inventory.display_inventory()
             input("Press Enter to continue...")
 
-        elif choice == "3":
+        elif choice == "4":
             if random.random() < 0.5:
                 print("You successfully escaped.")
                 return GameState.TOWN

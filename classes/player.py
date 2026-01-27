@@ -5,6 +5,8 @@ Docstring for classes.player
 from classes.inventory import Inventory
 from core.audio import jouer_bruit
 
+from skills.mage import Fireball
+
 
 class Player:
     """
@@ -22,6 +24,11 @@ class Player:
 
         self.exp = 0
         self.exp_needed = 100
+
+        self.skills = []
+
+        if player_class == "Mage":
+            self.skills.append(Fireball())
 
         self.mana = self.maxmana = 20 if player_class == "Mage" else 0
         self.agility = self.maxagility = 2 if player_class == "Rogue" else 0
