@@ -1,3 +1,7 @@
+"""
+Docstring for combat.battle
+    Module generating battle logic
+"""
 import random
 import time
 from core.audio import jouer_bruit
@@ -5,6 +9,13 @@ from core.state import GameState
 
 
 def battle(player, monster):
+    """
+    Docstring for battle
+    
+        Game battle logic
+    :param player: using player data
+    :param monster: using monster data loaded from zones
+    """
     poison = 0
     poison_active = False
     stun = 0
@@ -15,7 +26,7 @@ def battle(player, monster):
     while player.health > 0 and monster.health > 0:
 
         print("\n╔----------------------╗")
-        print(f"{player.name} HP: {player.health}/{player.max_health}")
+        print(f"  {player.name} HP: {player.health}/{player.max_health}")
         print(f"    {monster.name} HP: {monster.health}")
         print("╚----------------------╝")
 

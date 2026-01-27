@@ -1,9 +1,17 @@
+"""
+Docstring for main module
+"""
 from ui.intro import start_animation
 from classes.player import Player
 from core.game import game_loop
 
 
 def create_character():
+    """
+    Docstring for create_character
+
+        character creation logic
+    """
     name = input("Name: ") or "Numa"
     race = input("Race (Human/Elf/Dwarf): ").capitalize()
     player_class = input("Class (Mage/Rogue/Samuraï): ").capitalize()
@@ -11,6 +19,10 @@ def create_character():
 
 
 def main():
+    """
+    Docstring for main
+        main function for game
+    """
     start_animation()
 
     player = create_character()

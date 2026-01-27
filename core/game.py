@@ -1,9 +1,17 @@
+"""
+Docstring for core.game
+"""
 from core.state import GameState
 from zones import Tettno_main, Forest, AdventurersGuild, Bank
 from combat.battle import battle
 
 
 def game_loop(player):
+    """
+    Docstring for game_loop
+    
+    :param player: using player data
+    """
     state = GameState.TOWN
     running = True
     current_monster = None
@@ -20,8 +28,8 @@ def game_loop(player):
             current_monster = None
 
         elif state == GameState.GUILD:
-            state = AdventurersGuild(player)    
-        
+            state = AdventurersGuild(player)
+
         elif state == GameState.BANK:
             state = Bank(player)
 

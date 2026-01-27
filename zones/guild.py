@@ -1,7 +1,7 @@
 from core.loader import load_zone
 from core.game import GameState
 
-def AdventurersGuild(player, inventory):
+def AdventurersGuild(player):
     load_zone("Zones/adventurer_guild.json")
 
     print("1. Talk\n2. Inventory\n3. Back")
@@ -11,7 +11,7 @@ def AdventurersGuild(player, inventory):
         print("Story not available")
     elif choice == "2":
         try:
-            inventory.display_inventory()
+            player.inventory.display_inventory()
         except AttributeError :
             print("Err, Attribut Err")
     elif choice == "3":
