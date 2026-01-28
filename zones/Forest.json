@@ -15,6 +15,13 @@
         "attack": 3,
         "exp_reward": 30,
         "drop":{"Slime Gall":1}
+      },
+      {
+        "name": "Corrupted Wolf",
+        "health": 25,
+        "attack": 10,
+        "exp_reward": 80,
+        "drop":{"Fur":1}
       }
     ]
   }

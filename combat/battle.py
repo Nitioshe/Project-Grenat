@@ -36,6 +36,17 @@ def battle(player, monster):
 
         # ================= PLAYER TURN ================= #
 
+        for status in player.status_effects[:]:
+            status.on_turn_start(player)
+            if status.tick():
+                player.status_effects.remove(status)
+        
+        if player.stunned:
+            print(f"{player.name} is stunned !")
+            player.stunned = False
+            
+        # A ident pour stun bloquant atk
+        
         if choice == "1":
             damage = random.randint(player.attack // 2, player.attack)
             monster.health -= damage
@@ -94,7 +105,14 @@ def battle(player, monster):
 
         # ================= MONSTER TURN ================= #
 
-        if stun > 0:
+        usable_skills = [s for s in monster.skills if s.can_use(monster)]
+
+        if usable_skills and random.randint() < 0.4:
+            skill = random.choice(usable_skills)
+            skill.use(monster, player)
+            jouer_bruit("Sound Effect/attack-sound.mp3")
+
+        elif stun > 0:
             print(f"{monster.name} is stunned and cannot move.")
             stun -= 1
         else:
