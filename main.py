@@ -17,8 +17,8 @@ def create_character():
         character creation logic
     """
     name = input("Name: ") or "Numa"
-    race = input("Race (Human/Elf/Dwarf): ").capitalize()
-    player_class = input("Class (Mage/Rogue/Samuraï): ").capitalize()
+    race = input("Race (Human/Elf/Dwarf): ").capitalize() or "Human"
+    player_class = input("Class (Mage/Rogue/Warrior/Samuraï): ").capitalize() or "Warrior"
     return Player(name, race, player_class)
 
 
@@ -33,7 +33,7 @@ def main():
 
     if choice == "load":
         player = load_game()
-        
+
         if player is None:
             print("No save found.")
             return

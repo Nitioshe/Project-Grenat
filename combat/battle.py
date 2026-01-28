@@ -30,7 +30,7 @@ def battle(player, monster):
         print(f"    {monster.name} HP: {monster.health}")
         print("╚----------------------╝")
 
-        print("1. Attack\n2. Skills\n 3. Inventory\n4. Flee")
+        print("1. Attack\n2. Skills\n3. Inventory\n4. Flee")
 
         choice = input("> ")
 
@@ -59,10 +59,7 @@ def battle(player, monster):
                 skill.use(player, monster)
             else:
                 print("Skill indisponible")
-            
-            for skill in player.skills:
-                skill.reduce_cooldown()
-        
+
         elif choice == "3":
             player.inventory.display_inventory()
             input("Press Enter to continue...")
@@ -77,6 +74,9 @@ def battle(player, monster):
         else:
             print("Invalid choice.")
             continue
+        
+        for skill in player.skills:
+            skill.reduce_cooldown()
 
         # ================= MONSTER DEAD ================= #
 

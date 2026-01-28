@@ -5,7 +5,7 @@ Docstring for classes.player
 from classes.inventory import Inventory
 from core.audio import jouer_bruit
 
-from skills.mage import Fireball
+from skills.mage import Fireball, Healing
 from skills.rogue import Backstab
 from skills.samurai import Iaijutsu
 
@@ -31,6 +31,7 @@ class Player:
 
         if player_class == "Mage":
             self.skills.append(Fireball())
+            self.skills.append(Healing())
         elif player_class == "Rogue":
             self.skills.append(Backstab())
         elif player_class == "Samurai":
