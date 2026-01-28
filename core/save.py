@@ -22,7 +22,7 @@ def save_game(player):
     data["skills"] = [s.to_dict() for s in player.skills]
 
     # status effects
-    data["status_effects"] = [s.to_dict() for s in player.status_effects]
+    data["status_effect"] = [s.to_dict() for s in player.status_effect]
 
     with open(SAVE_FILE, "w", encoding="utf8") as f:
         json.dump(data, f, indent=4)

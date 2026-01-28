@@ -36,10 +36,10 @@ def battle(player, monster):
 
         # ================= PLAYER TURN ================= #
 
-        for status in player.status_effects[:]:
+        for status in player.status_effect[:]:
             status.on_turn_start(player)
             if status.tick():
-                player.status_effects.remove(status)
+                player.status_effect.remove(status)
         
         if player.stunned:
             print(f"{player.name} is stunned !")
