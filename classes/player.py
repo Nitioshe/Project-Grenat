@@ -41,6 +41,9 @@ class Player:
         self.agility = self.maxagility = 2 if player_class == "Rogue" else 0
         self.dexterity = self.maxdexterity = 2 if player_class == "Samuraï" else 0
 
+        self.status_effect = []
+        self.stunned = False
+
         self.inventory = Inventory()
 
     def display_stats(self):

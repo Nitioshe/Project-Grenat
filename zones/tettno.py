@@ -1,13 +1,14 @@
 import time
 from core.loader import load_zone
 from core.state import GameState
+from ui.skills_menu import skills_menu
 
 
 def Tettno_main(player):
     load_zone("Zones/Tettno.json")
     time.sleep(1)
 
-    print("1. Talk\n2. Inventory\n3. Go elsewhere\nq. Quit")
+    print("1. Talk\n2. Menu\n3. Go elsewhere\nq. Quit")
 
     choice = input("> ")
 
@@ -16,8 +17,16 @@ def Tettno_main(player):
         return GameState.TOWN
 
     elif choice == "2":
-        player.inventory.display_inventory()
-        input("Press Enter to continue...")
+        print("\n-== Sub Menu ==-")
+        print("1. Display Inventory\n2. Display Skills")
+        choice2 = input("> ")
+
+        if choice2 == "1":
+            player.inventory.display_inventory()
+            input("Press Enter to continue...")
+        elif choice2 == "2":
+            skills_menu(player)
+            input("Press Enter to continue...")
         return GameState.TOWN
 
     elif choice == "3":
