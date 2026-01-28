@@ -5,6 +5,9 @@ Docstring for classes.player
 from classes.inventory import Inventory
 from core.audio import jouer_bruit
 
+from skills.factory import create_skill
+from combat.status_factory import create_status
+
 from skills.mage import Fireball, Healing
 from skills.rogue import Backstab
 from skills.samurai import Iaijutsu
@@ -105,9 +108,12 @@ class Player:
             "maxagility": self.maxagility,
             "dexterity": self.dexterity,
             "maxdexterity": self.maxdexterity,
+            "skills": [skill.to_dict() for skill in self.skills],
+            "status_effects": [s.to_dict() for s in self.status_effect],
         }
 
     @staticmethod # deco
+    
     def from_dict(data):
         """
         Docstring for from_dict
@@ -135,3 +141,16 @@ class Player:
         player.maxdexterity = data.get("maxdexterity", 0)
 
         return player
+
+    def load_skills(self, skills_data):
+        self.skills = []
+        for s in skills_data:
+            skill = create_skill(s["name"])
+            skill.load_state(s)
+            self.skills.append(skill)
+
+    def load_status(self, status_data):
+        self.status_effect = []
+        for s in status_data:
+            status = create_status(s["name"], s["duration"])
+            self.status_effect.append(status)

@@ -107,10 +107,10 @@ def battle(player, monster):
 
         usable_skills = [s for s in monster.skills if s.can_use(monster)]
 
-        if usable_skills and random.randint() < 0.4:
+        if usable_skills and random.randint(1, 2) < 0.4:
             skill = random.choice(usable_skills)
             skill.use(monster, player)
-            jouer_bruit("Sound Effect/attack-sound.mp3")
+            jouer_bruit("Sound Effect/attack-sound.mp3")    #must be fixed
 
         elif stun > 0:
             print(f"{monster.name} is stunned and cannot move.")

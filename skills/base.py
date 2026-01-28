@@ -5,6 +5,15 @@ class Skills:
         self.cooldown = cooldown
         self.current_cd = 0
 
+    def to_dict(self):
+        return {
+            "name": self.name,
+            "current_cd": self.current_cd
+        }
+
+    def load_state(self, data):
+        self.current_cd = data.get("current_cd", 0)
+
     def can_use(self, player):
         return self.current_cd == 0
 

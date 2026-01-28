@@ -4,17 +4,13 @@ Docstring for main module
 from ui.intro import start_animation
 from ui.menu import main_menu
 from classes.player import Player
-from classes.inventory import Inventory
 from core.game import game_loop
-from core.save import load_game
-from core.save import save_game
+from core.save import load_game, save_game
 
 
 def create_character():
     """
-    Docstring for create_character
-
-        character creation logic
+    Character creation logic
     """
     name = input("Name: ") or "Numa"
     race = input("Race (Human/Elf/Dwarf): ").capitalize() or "Human"
@@ -24,8 +20,7 @@ def create_character():
 
 def main():
     """
-    Docstring for main
-        main function for game
+    Main entry point
     """
     start_animation()
 
@@ -38,10 +33,12 @@ def main():
             print("No save found.")
             return
     else:
-        inventory = Inventory()
         player = create_character()
 
-    game_loop(player)
+    try:
+        game_loop(player)
+    finally:
+        save_game(player)
 
 
 if __name__ == "__main__":

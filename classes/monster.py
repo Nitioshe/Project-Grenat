@@ -12,5 +12,7 @@ class Monster:
         if self.name == "Corrupted Wolf":
             self.skills.append(VenomBite())
 
+        self.status_effect = []
+
     def display_stats(self):
         print(f"{self.name} - Health: {self.health}, Attack: {self.attack}")

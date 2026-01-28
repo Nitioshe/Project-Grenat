@@ -12,7 +12,13 @@ class StatusEffect:
         def tick(self):
             self.duration -= 1
             return self.duration <= 0
-        
+
+    def to_dict(self):
+        return {
+            "name": self.name,
+            "duration": self.duration
+        }
+
 class Poison(StatusEffect):
     def __init__(self, duration=3, damage=2):
         super().__init__("Poison", duration)

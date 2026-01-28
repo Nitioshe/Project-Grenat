@@ -1,6 +1,6 @@
 """
 Docstring for core.save
-    Save & Save Loading module logic
+    Save & Load module logic
 """
 import json
 from classes.player import Player
@@ -9,18 +9,20 @@ from classes.inventory import Inventory
 SAVE_FILE = "Saves/save.json"
 
 
-def save_game(player, inventory):
+def save_game(player):
     """
-    Docstring for save_game
-    
-    :param player: using player data
-    :param inventory: using player inventory data
-        Save logic
+    Save game logic
     """
-    data = {
-        "player": player.to_dict(),
-        "inventory": inventory.items
-    }
+    data = player.to_dict()
+
+    # inventaire
+    data["inventory"] = player.inventory.items
+
+    # skills
+    data["skills"] = [s.to_dict() for s in player.skills]
+
+    # status effects
+    data["status_effects"] = [s.to_dict() for s in player.status_effects]
 
     with open(SAVE_FILE, "w", encoding="utf8") as f:
         json.dump(data, f, indent=4)
@@ -28,24 +30,29 @@ def save_game(player, inventory):
 
 def load_game():
     """
-    Docstring for load_game
-        Save Loading logic
+    Load game logic
     """
     try:
         with open(SAVE_FILE, "r", encoding="utf8") as f:
             data = json.load(f)
 
-        player = Player.from_dict(data["player"])
+        player = Player.from_dict(data)
 
+        # inventaire
         inventory = Inventory()
         inventory.items = data.get("inventory", {})
-
         player.inventory = inventory
 
-        return player, inventory
+        # skills
+        player.load_skills(data.get("skills", []))
+
+        # status effects
+        player.load_status(data.get("status_effects", []))
+
+        return player
 
     except FileNotFoundError:
-        return None, None
-    except KeyError:
-        print("Err, BadFile or Method")
-        return "new"
+        return None
+    except (KeyError, ValueError):
+        print("Error: corrupted save file")
+        return None
