@@ -14,7 +14,7 @@ def create_character():
     """
     name = input("Name: ") or "Numa"
     race = input("Race (Human/Elf/Dwarf): ").capitalize() or "Human"
-    player_class = input("Class (Mage/Rogue/Warrior/Samuraï): ").capitalize() or "Warrior"
+    player_class = input("Class (Mage/Rogue/Warrior/Samurai): ").capitalize() or "Warrior"
     return Player(name, race, player_class)
 
 
