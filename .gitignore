@@ -1,6 +1,12 @@
 __pycache__/
 *.pyc
+*.exe
 .env
+*.zip
+ExecPath/
+*.spec
+build/
+dist/
 venv/
 .env/
 save.json

@@ -6,7 +6,7 @@ import random
 import time
 from core.audio import jouer_bruit
 from core.state import GameState
-
+from core.discord_rpc import update_rpc
 
 def battle(player, monster):
     """
@@ -22,6 +22,7 @@ def battle(player, monster):
 
     print("\nBattle Start!")
     print(f"{monster.name} appears.")
+    update_rpc(f"Battle against {monster.name}", "In combat")
 
     while player.health > 0 and monster.health > 0:
 

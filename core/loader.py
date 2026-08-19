@@ -1,5 +1,6 @@
 import json
 import time
+from core.discord_rpc import update_rpc
 
 player_zone = ""
 
@@ -15,6 +16,7 @@ def load_zone(zone_path):
 
         print("-")
         print("Zone Name:", data["name"])
+        update_rpc(f"In {data["name"]}", "Waiting")
         time.sleep(1)
         print("Description:", data["description"])
         print("-")

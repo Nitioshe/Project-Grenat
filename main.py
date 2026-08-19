@@ -6,7 +6,7 @@ from ui.menu import main_menu
 from classes.player import Player
 from core.game import game_loop
 from core.save import load_game, save_game
-
+from core.discord_rpc import start_rpc, stop_rpc
 
 def create_character():
     """
@@ -22,9 +22,14 @@ def main():
     """
     Main entry point
     """
+    start_rpc()
     start_animation()
 
     choice = main_menu()
+
+    if choice == "new":
+        print("\n=    Character Creation Menu    =\n")
+        player = create_character()
 
     if choice == "load":
         player = load_game()
@@ -32,12 +37,15 @@ def main():
         if player is None:
             print("No save found.")
             return
-    else:
-        player = create_character()
+
+    if choice == "quit":
+        print("\nQuit Game.")
+        return
 
     try:
         game_loop(player)
     finally:
+        stop_rpc()
         save_game(player)
 
 
