@@ -9,8 +9,23 @@ from skills.factory import create_skill
 from combat.status_factory import create_status
 
 from skills.mage import Fireball, Healing
-from skills.rogue import Backstab
-from skills.samurai import Iaijutsu
+from skills.rogue import Backstab, PoisonStrike
+from skills.samurai import Iaijutsu, QuickSlash
+
+SKILL_DICT = {
+    "Mage": {
+        2: Healing,
+        5: Fireball,
+    },
+    "Rogue": {
+        2: Backstab,
+        5: PoisonStrike,
+    },
+    "Samurai": {
+        2: Iaijutsu,
+        5: QuickSlash,
+    },
+}
 
 
 class Player:
@@ -32,22 +47,37 @@ class Player:
 
         self.skills = []
 
-        if player_class == "Mage":
-            self.skills.append(Fireball())
-            self.skills.append(Healing())
-        elif player_class == "Rogue":
-            self.skills.append(Backstab())
-        elif player_class == "Samurai":
-            self.skills.append(Iaijutsu())
+        self.unlock_skills()
 
         self.mana = self.maxmana = 20 if player_class == "Mage" else 0
         self.agility = self.maxagility = 2 if player_class == "Rogue" else 0
-        self.dexterity = self.maxdexterity = 2 if player_class == "Samuraï" else 0
+        self.dexterity = self.maxdexterity = 2 if player_class == "Samurai" else 0
 
         self.status_effect = []
         self.stunned = False
 
         self.inventory = Inventory()
+
+    def unlock_skills(self):
+        """
+        Débloque les skills à niveau.
+        """
+        class_skills = SKILL_DICT.get(self.player_class, {})
+
+        for level, skill_class in class_skills.items():
+            if self.level >= level:
+                skill = skill_class()
+
+                if not self.has_skill(skill.name):
+                    self.skills.append(skill)
+
+    def has_skill(self, skill_name):
+        """
+        Verif possesion skill
+        """
+        return any(skill.name ==skill_name for skill in self.skills)
+
+        
 
     def display_stats(self):
         """
@@ -60,9 +90,11 @@ class Player:
 
         if self.player_class == "Mage":
             print(f"Mana: {self.mana}/{self.maxmana}")
+
         elif self.player_class == "Rogue":
             print(f"Agility: {self.agility}/{self.maxagility}")
-        elif self.player_class == "Samuraï":
+
+        elif self.player_class == "Samurai":
             print(f"Dexterity: {self.dexterity}/{self.maxdexterity}")
 
     def level_up(self):
@@ -79,6 +111,8 @@ class Player:
             self.max_health += 20
             self.health += 20
             self.attack += 5
+
+            self.unlock_skills()
 
             jouer_bruit("Sound Effect/levelup-sound.mp3")
 
@@ -139,6 +173,8 @@ class Player:
         player.maxagility = data.get("maxagility", 0)
         player.dexterity = data.get("dexterity", 0)
         player.maxdexterity = data.get("maxdexterity", 0)
+
+        player.load_skills(data.get("skills", []))
 
         return player
 

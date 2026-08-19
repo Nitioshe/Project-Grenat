@@ -16,7 +16,7 @@ def battle(player, monster):
     :param player: using player data
     :param monster: using monster data loaded from zones
     """
-    poison = 0
+    poison = 2
     poison_active = False
     stun = 0
 
@@ -54,11 +54,6 @@ def battle(player, monster):
             jouer_bruit("Sound Effect/attack-sound.mp3")
             print(f"{player.name} attacks {monster.name} for {damage}")
 
-            if poison_active:
-                poison_damage = random.randint(1, poison * 2)
-                monster.health -= poison_damage
-                print(f"{monster.name} suffers {poison_damage} poison damage")
-
         elif choice == "2":
             for i, skill in enumerate(player.skills):
                 cd = f"(CD: {skill.current_cd})" if skill.current_cd > 0 else ""
@@ -66,6 +61,14 @@ def battle(player, monster):
 
             s = int(input("> ")) - 1
             skill = player.skills[s]
+
+            if skill.name == "PoisonStrike" :
+                poison_active = True
+
+            if poison_active:
+                poison_damage = random.randint(1, poison * 2)
+                monster.health -= poison_damage
+                print(f"{monster.name} suffers {poison_damage} poison damage")
 
             if skill.can_use(player):
                 skill.use(player, monster)

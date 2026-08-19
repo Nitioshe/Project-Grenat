@@ -14,3 +14,17 @@ class Iaijutsu(Skills):
         target.health -= damage
         self.start_cooldown()
         print(f"{player.name} exécute Iaijutsu et inflige {damage} dégâts")
+
+class QuickSlash(Skills):
+    def __init__(self):
+        super().__init__("QuickSlash", cost=2, cooldown=3)
+
+    def can_use(self, player):
+        return player.dexterity >= self.cost and super().can_use(player)
+
+    def use(self, player, target):
+        player.dexterity -= self.cost
+        damage = random.randint(20, 30)
+        target.health -= damage
+        self.start_cooldown()
+        print(f"{player.name} exécute QuickSlash et inflige {damage} dégâts")

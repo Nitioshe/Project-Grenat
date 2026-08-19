@@ -22,7 +22,7 @@ def save_game(player):
     data["skills"] = [s.to_dict() for s in player.skills]
 
     # status effects
-    data["status_effect"] = [s.to_dict() for s in player.status_effect]
+    data["status_effects"] = [s.to_dict() for s in player.status_effect]
 
     with open(SAVE_FILE, "w", encoding="utf8") as f:
         json.dump(data, f, indent=4)
@@ -53,6 +53,7 @@ def load_game():
 
     except FileNotFoundError:
         return None
-    except (KeyError, ValueError):
-        print("Error: corrupted save file")
+
+    except (json.JSONDecodeError, KeyError, ValueError, TypeError) as error:
+        print(f"Error: corrupted save file ({error})")
         return None
