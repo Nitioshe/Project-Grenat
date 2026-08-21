@@ -12,3 +12,4 @@ def start_animation():
         time.sleep(0.5)
         print(".", end="", flush=True)
     print("\n")
+    jouer_bruit("Sound Effect/Start-Game.wav")

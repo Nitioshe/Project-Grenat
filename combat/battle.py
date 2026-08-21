@@ -51,7 +51,7 @@ def battle(player, monster):
         if choice == "1":
             damage = random.randint(player.attack // 2, player.attack)
             monster.health -= damage
-            jouer_bruit("Sound Effect/attack-sound.mp3")
+            jouer_bruit("Sound Effect/attack-sound.wav")
             print(f"{player.name} attacks {monster.name} for {damage}")
 
         elif choice == "2":
@@ -114,7 +114,7 @@ def battle(player, monster):
         if usable_skills and random.randint(1, 2) < 0.4:
             skill = random.choice(usable_skills)
             skill.use(monster, player)
-            jouer_bruit("Sound Effect/attack-sound.mp3")    #must be fixed
+            jouer_bruit("Sound Effect/attack-sound.wav")    #must be fixed
 
         elif stun > 0:
             print(f"{monster.name} is stunned and cannot move.")
@@ -122,13 +122,13 @@ def battle(player, monster):
         else:
             damage = random.randint(monster.attack // 2, monster.attack)
             player.health -= damage
-            jouer_bruit("Sound Effect/attack-sound.mp3")
+            jouer_bruit("Sound Effect/attack-sound.wav")
             print(f"{monster.name} attacks {player.name} for {damage}")
 
         # ================= PLAYER DEAD ================= #
 
         if player.health <= 0:
-            jouer_bruit("Sound Effect/death-sound.mp3")
+            jouer_bruit("Sound Effect/death-sound.wav")
             print(f"{player.name} has been defeated.")
             return GameState.EXIT
 

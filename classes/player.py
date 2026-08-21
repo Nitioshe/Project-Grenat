@@ -114,7 +114,8 @@ class Player:
 
             self.unlock_skills()
 
-            jouer_bruit("Sound Effect/levelup-sound.mp3")
+            print(f"\n{self.name} has reached lvl {self.level} !\n")
+            jouer_bruit("Sound Effect/levelup-sound.wav")
 
     # =======================
     # SAVE / LOAD
