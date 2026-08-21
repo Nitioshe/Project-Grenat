@@ -1,5 +1,5 @@
 """
-Docstring for skills.mage
+Docstring for skills.warrior
 """
 import random
 from skills.base import Skills
@@ -7,10 +7,11 @@ from core.audio import jouer_bruit
 
 class LightBarrier(Skills):
     """
-    Docstring for Healing
+    Docstring for LightBarrier
     """
     def __init__(self):
-        super().__init__("LightBarrier", cost=10, cooldown=3)
+        super().__init__("LightBarrier", cost=1, cooldown=3)
+        self.barrier_turns = 0
 
     def can_use(self, player):
         return player.dexterity >= self.cost and super().can_use(player)
@@ -18,12 +19,27 @@ class LightBarrier(Skills):
     def use(self, player, target):
 
         player.dexterity -= self.cost
-        lifeheal = player.max_health * 0.15
-        player.health += lifeheal
-
-        if player.health > player.max_health :
-            player.health = player.max_health
+        self.barrier_turns = 2
 
         self.start_cooldown()
-        jouer_bruit("Sound Effect/heal-sound.wav")
-        print(f"{player.name} cast heal and gain {lifeheal} hp.")
+
+        print(f"{player.name} uses Light Barrier!")
+        print("Light Barrier is active for 2 turns.")
+
+        def reduce_damage(self, damage):
+            """
+                Reduction degat par barriere
+            """
+            if self.barrier_turns <= 0:
+                return damage
+            if self.barrier_turns == 2:
+                reduced_damage = 0
+                print("LightBarrier blocks all damages!")
+            else:
+                reduced_damage = int(damage * 0.25)
+                print(f"Light Barrier blocks 75% of the damages!")
+                print(f"{damage} -> {reduced_damage}")
+
+            self.barrier_turns -=1
+
+            return reduced_damage

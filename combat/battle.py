@@ -8,6 +8,17 @@ from core.audio import jouer_bruit
 from core.state import GameState
 from core.discord_rpc import update_rpc
 
+def apply_damages(player, damage):
+    """
+        applique les degats avec modif dgt par skills
+    """
+    for skill in player.skills:
+        if hasattr(skill, "reduce_damage"):
+            damage = skill.reduce_damage(damage)
+    player.health -= damage
+
+    return damage
+
 def battle(player, monster):
     """
     Docstring for battle
@@ -137,6 +148,10 @@ def battle(player, monster):
             stun -= 1
         else:
             damage = random.randint(monster.attack // 2, monster.attack)
+            for skill in player.skills:
+                if hasattr(skill, "reduce_damage"):
+                    damage = apply_damages(player, damage)
+
             player.health -= damage
             jouer_bruit("Sound Effect/attack-sound.wav")
             print(f"{monster.name} attacks {player.name} for {damage}")

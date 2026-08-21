@@ -19,11 +19,15 @@ def Forest(player):
 
     print("1. Explore\n2. Back to city")
 
-    choice = input("> ")
 
-    if choice == "1":
-        return GameState.COMBAT, monster
-    elif choice == "2":
-        return GameState.TOWN
+    while True:
+        choice = input("> ")
+
+        if choice == "1":
+            return GameState.COMBAT, monster
+        elif choice == "2":
+            return GameState.TOWN, None
+        else:
+            print("Invalid choice\n")
     
-    return GameState.FOREST
+        return GameState.FOREST, monster
