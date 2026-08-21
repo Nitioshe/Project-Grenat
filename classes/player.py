@@ -11,6 +11,7 @@ from combat.status_factory import create_status
 from skills.mage import Fireball, Healing
 from skills.rogue import Backstab, PoisonStrike
 from skills.samurai import Iaijutsu, QuickSlash
+from skills.warrior import LightBarrier
 
 SKILL_DICT = {
     "Mage": {
@@ -24,6 +25,9 @@ SKILL_DICT = {
     "Samurai": {
         2: Iaijutsu,
         5: QuickSlash,
+    },
+    "Warrior": {
+        2: LightBarrier
     },
 }
 
@@ -52,6 +56,7 @@ class Player:
         self.mana = self.maxmana = 20 if player_class == "Mage" else 0
         self.agility = self.maxagility = 2 if player_class == "Rogue" else 0
         self.dexterity = self.maxdexterity = 2 if player_class == "Samurai" else 0
+        self.dexterity = self.maxdexterity = 2 if player_class == "Warrior" else 0
 
         self.status_effect = []
         self.stunned = False
@@ -97,6 +102,9 @@ class Player:
 
         elif self.player_class == "Samurai":
             print(f"    Dexterity: {self.dexterity}/{self.maxdexterity}")
+
+        elif self.player_class == "Warrior":
+                    print(f"    Dexterity: {self.dexterity}/{self.maxdexterity}")
 
         print("╚===---=== Stats Menu ===---===╝\n")
 

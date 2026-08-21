@@ -57,26 +57,29 @@ def battle(player, monster):
             print(f"{player.name} attacks {monster.name} for {damage}")
 
         elif choice == "2":
-            for i, skill in enumerate(player.skills):
-                cd = f"(CD: {skill.current_cd})" if skill.current_cd > 0 else "(No CD)"
-                print(f"{i+1}. {skill.name} {cd}")
 
-            s = int(input("> ")) - 1
-
-            if s < 0 or s >= len(player.skills):
-                print("Invalid Skill")
-                continue
-
-            skill = player.skills[s]
-
-            if skill.can_use(player):
-                skill.use(player, monster)
-
-                if skill.name == "PoisonStrike" :
-                    poison_active = True
-                    poison_turns = random.randint(2, 4)
+            if not player.skills:
+                print("No Skills available")
             else:
-                print("Skill indisponible")
+                for i, skill in enumerate(player.skills):
+                    cd = f"(CD: {skill.current_cd})" if skill.current_cd > 0 else "(No CD)"
+                    print(f"{i+1}. {skill.name} {cd}")
+
+                s = int(input("> ")) - 1
+                skill = player.skills[s]
+
+                if s < 0 or s >= len(player.skills):
+                    print("Invalid Skill")
+                    continue
+
+                if skill.can_use(player):
+                    skill.use(player, monster)
+
+                    if skill.name == "PoisonStrike" :
+                        poison_active = True
+                        poison_turns = random.randint(2, 4)
+                else:
+                    print("Skill indisponible")
 
         elif choice == "3":
             player.inventory.display_inventory()

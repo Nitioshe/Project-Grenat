@@ -1,14 +1,20 @@
 from skills.mage import Fireball, Healing
-from skills.rogue import Backstab
-from skills.samurai import Iaijutsu
+from skills.rogue import Backstab, PoisonStrike
+from skills.samurai import Iaijutsu, QuickSlash
+from skills.warrior import LightBarrier
 
 SKILL_REGI = {
     "Fireball": Fireball,
     "Heal": Healing,
 
     "Backstab": Backstab,
+    "PoisonStrike": PoisonStrike,
 
-    "Iaijutsu": Iaijutsu
+    "Iaijutsu": Iaijutsu,
+    "QuickSlash": QuickSlash,
+
+    "LightBarrier": LightBarrier,
+
 }
 
 def create_skill(name):
