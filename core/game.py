@@ -2,7 +2,7 @@
 Docstring for core.game
 """
 from core.state import GameState
-from zones import Tettno_main, Forest, AdventurersGuild, Bank
+from zones import Tettno_main, Forest, TettnoGuild, Bank
 from combat.battle import battle
 
 
@@ -28,7 +28,7 @@ def game_loop(player):
             current_monster = None
 
         elif state == GameState.GUILD:
-            state = AdventurersGuild(player)
+            state = TettnoGuild(player)
 
         elif state == GameState.BANK:
             state = Bank(player)

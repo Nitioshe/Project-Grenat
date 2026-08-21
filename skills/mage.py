@@ -3,6 +3,7 @@ Docstring for skills.mage
 """
 import random
 from skills.base import Skills
+from core.audio import jouer_bruit
 
 class Fireball(Skills):
     """
@@ -41,4 +42,5 @@ class Healing(Skills):
             player.health = player.max_health
 
         self.start_cooldown()
+        jouer_bruit("Sound Effect/heal-sound.wav")
         print(f"{player.name} cast heal and gain {lifeheal} hp.")

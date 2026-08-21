@@ -16,8 +16,8 @@ def Bank(player):
     elif choice == "3":
         player.inventory.display_inventory()
         input("Press Enter to continue...")
-        return GameState.TOWN
-    elif choice == "":
-        print("Not available")
         return GameState.BANK
+    elif choice == "4":
+        print("You quit the bank.")
+        return GameState.TOWN
     return GameState.BANK

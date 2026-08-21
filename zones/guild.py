@@ -1,8 +1,8 @@
 from core.loader import load_zone
 from core.game import GameState
 
-def AdventurersGuild(player):
-    load_zone("Zones/adventurer_guild.json")
+def TettnoGuild(player):
+    load_zone("Zones/tettno_guild.json")
 
     print("1. Talk\n2. Inventory\n3. Back")
     choice = input("> ")
@@ -12,6 +12,7 @@ def AdventurersGuild(player):
     elif choice == "2":
         try:
             player.inventory.display_inventory()
+            
         except AttributeError :
             print("Err, Attribut Err")
     elif choice == "3":

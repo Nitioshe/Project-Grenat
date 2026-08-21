@@ -85,17 +85,20 @@ class Player:
         
         :param self: player character
         """
-        print(f"{self.name} (Lvl {self.level}) - {self.race} {self.player_class}")
-        print(f"HP: {self.health}/{self.max_health} | ATK: {self.attack}")
+        print("\n╔===---=== Stats Menu ===---===╗")
+        print(f"    {self.name} (Lvl {self.level}) - {self.race} {self.player_class}")
+        print(f"    HP: {self.health}/{self.max_health} | ATK: {self.attack}")
 
         if self.player_class == "Mage":
-            print(f"Mana: {self.mana}/{self.maxmana}")
+            print(f"    Mana: {self.mana}/{self.maxmana}")
 
         elif self.player_class == "Rogue":
-            print(f"Agility: {self.agility}/{self.maxagility}")
+            print(f"    Agility: {self.agility}/{self.maxagility}")
 
         elif self.player_class == "Samurai":
-            print(f"Dexterity: {self.dexterity}/{self.maxdexterity}")
+            print(f"    Dexterity: {self.dexterity}/{self.maxdexterity}")
+
+        print("╚===---=== Stats Menu ===---===╝\n")
 
     def level_up(self):
         """

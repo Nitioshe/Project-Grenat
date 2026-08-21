@@ -18,6 +18,8 @@ def battle(player, monster):
     """
     poison = 2
     poison_active = False
+    poison_turns = 0
+
     stun = 0
 
     print("\nBattle Start!")
@@ -56,22 +58,23 @@ def battle(player, monster):
 
         elif choice == "2":
             for i, skill in enumerate(player.skills):
-                cd = f"(CD: {skill.current_cd})" if skill.current_cd > 0 else ""
+                cd = f"(CD: {skill.current_cd})" if skill.current_cd > 0 else "(No CD)"
                 print(f"{i+1}. {skill.name} {cd}")
 
             s = int(input("> ")) - 1
+
+            if s < 0 or s >= len(player.skills):
+                print("Invalid Skill")
+                continue
+
             skill = player.skills[s]
-
-            if skill.name == "PoisonStrike" :
-                poison_active = True
-
-            if poison_active:
-                poison_damage = random.randint(1, poison * 2)
-                monster.health -= poison_damage
-                print(f"{monster.name} suffers {poison_damage} poison damage")
 
             if skill.can_use(player):
                 skill.use(player, monster)
+
+                if skill.name == "PoisonStrike" :
+                    poison_active = True
+                    poison_turns = random.randint(2, 4)
             else:
                 print("Skill indisponible")
 
@@ -110,6 +113,16 @@ def battle(player, monster):
         # ================= MONSTER TURN ================= #
 
         usable_skills = [s for s in monster.skills if s.can_use(monster)]
+
+        if poison_active:
+            poison_damage = random.randint(1, poison *2)
+            monster.health -= poison_damage
+            print(f"{monster.name} suffers {poison_damage} poison damages.")
+
+            poison_turns -= 1
+
+            if poison_turns <= 0:
+                poison_active = False
 
         if usable_skills and random.randint(1, 2) < 0.4:
             skill = random.choice(usable_skills)

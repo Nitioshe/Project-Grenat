@@ -18,15 +18,19 @@ def Tettno_main(player):
 
     elif choice == "2":
         print("\n-== Sub Menu ==-")
-        print("1. Display Inventory\n2. Display Skills")
+        print("1. Display Stats\n2. Display Skills\n3. Display Inventory")
         choice2 = input("> ")
 
         if choice2 == "1":
-            player.inventory.display_inventory()
-            input("Press Enter to continue...")
+            player.display_stats()
+            input("Press Enter to continue...\n")
         elif choice2 == "2":
             skills_menu(player)
-            input("Press Enter to continue...")
+            input("Press Enter to continue...\n")
+        elif choice2 == "3":
+            player.inventory.display_inventory()
+            input("Press Enter to continue...\n")
+
         return GameState.TOWN
 
     elif choice == "3":
