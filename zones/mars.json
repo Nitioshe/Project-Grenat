@@ -1,4 +1,12 @@
 {
   "name": "Mars",
-  "description": "You see orange dust until the horizon"
+  "description": "You see orange dust until the horizon",
+  "villagers": [
+    {
+      "name": "Teto",
+      "title": "A Voice of Freedom, she is real btw",
+      "health": "-1",
+      "attack": "-1"
+    }
+  ]
 }
